@@ -1,0 +1,25 @@
+services:
+  ansible:
+    build: .
+    image: ansible-execution-env:latest
+    volumes:
+      - ${PLAYBOOK_DIR:-~/code/rhel9-desktop-stig}:/playbooks
+      - ${SSH_DIR:-~/.ssh}:/home/ansible/.ssh:ro
+    working_dir: /playbooks
+    environment:
+      - ANSIBLE_HOST_KEY_CHECKING=False
+    command: ansible-playbook /playbooks/playbooks/harden.yml -i /playbooks/inventory/hosts
+
+    # --- Security hardening ---
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m
+      - /home/ansible:size=32m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+    # --- Resource limits (uncomment and tune as needed) ---
+    # mem_limit: 512m
+    # cpus: "2.0"

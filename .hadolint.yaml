@@ -1,0 +1,8 @@
+# Hadolint configuration
+# DL3041: microdnf version pinning — impractical on UBI9, packages follow RHEL errata
+# DL3013: pip version pinning — handled via requirements.txt, not inline
+# SC2015: A && B || C pattern — intentional for fallback behavior (always proceed)
+ignored:
+  - DL3041
+  - DL3013
+  - SC2015

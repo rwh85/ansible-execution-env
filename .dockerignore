@@ -1,0 +1,32 @@
+# VCS
+.git
+.gitignore
+
+# Documentation
+README.md
+LICENSE
+*.md
+docs/
+
+# Build/CI artifacts
+Makefile
+docker-compose.yml
+*.tar.gz
+*.zip
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets — must never enter build context
+.env
+*.pem
+*.key
+id_rsa*
