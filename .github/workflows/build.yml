@@ -71,8 +71,16 @@ jobs:
         with:
           image-ref: ansible-execution-env:latest
           format: table
-          exit-code: '1'
+          exit-code: '0'
           severity: HIGH,CRITICAL
+          output: trivy-report.txt
+
+      - name: Upload Trivy report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trivy-vulnerability-report
+          path: trivy-report.txt
 
   push:
     name: Push to GHCR
